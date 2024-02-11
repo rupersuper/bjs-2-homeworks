@@ -12,6 +12,16 @@ class PrintEditionItem {
   }
 
   set state(state) {
+    // switch (true) {
+    //   case state < 0:
+    //     this._state = 0;
+    //     break;
+    //   case state > 100:
+    //     this._state = 100;
+    //     break;
+    //   default:
+    //     this._state = state;
+    // }
     if (state < 0) {
       this._state = 0;
     } else if (state > 100) {
@@ -88,5 +98,49 @@ class Library extends PrintEditionItem {
     } else {
       return null;
     }
+  }
+}
+
+class Student {
+  constructor(name) {
+    this.name = name;
+    this.marks = {};
+  }
+
+  addMark(mark, subject) {
+    if (mark < 2 || mark > 5) {
+      return;
+    }
+
+    if (!this.marks[subject]) {
+      this.marks[subject] = [];
+    }
+    this.marks[subject].push(mark);
+  }
+
+  getAverageBySubject(subject) {
+    if (!this.marks[subject]) {
+      return 0;
+    }
+    return (
+      this.marks[subject].reduce(
+        (accumulator, currentNumber) => accumulator + currentNumber,
+        0
+      ) / this.marks[subject].length
+    );
+  }
+
+  getAverage() {
+    const arr = Object.keys(this.marks);
+    if (arr.length === 0) {
+      return 0;
+    }
+    return (
+      arr.reduce(
+        (accumulator, subject) =>
+          accumulator + this.getAverageBySubject(subject),
+        0
+      ) / arr.length
+    );
   }
 }
