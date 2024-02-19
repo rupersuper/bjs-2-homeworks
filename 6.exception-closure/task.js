@@ -29,7 +29,9 @@ class Triangle {
 
   get area() {
     const p = this.perimeter / 2;
-    return + Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3);
+    return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(
+      3
+    );
   }
 }
 
